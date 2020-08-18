@@ -1,18 +1,15 @@
 <template>
   <div class="l-page">
     <p>上傳原始PDF檔案</p>
+    <object :data="files" height="600" width="600" v-if="files" />
     <input id="inputFile" type="file" @change="convertToBase64()" />
-    <div class="iframe-position">
-      <iframe :src="files" height="500" width="500" v-if="files"></iframe>
-    </div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      test: "",
-      files: null,
+      files: null
     };
   },
   methods: {
@@ -31,19 +28,20 @@ export default {
         fileReader.onload = function(fileLoadedEvent) {
           self.files = fileLoadedEvent.target.result;
           // Print data in console
-          // console.log(self.files);
         };
         // Convert data to base64
         fileReader.readAsDataURL(fileToLoad);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
-.iframe-position {
-  text-align: center;
+#inputFile {
+  border: 1px solid;
+  // border-radius: 5px;
 }
+
 .l-page {
   margin: 10px;
 }
